@@ -33,7 +33,6 @@ int red = digitalread(B) // B representa el puerto en el que esta la señal de l
 	// Luego reviso si hay demasiadas fallas
 	if (intentos intentosFallidos > 5) {
 		// Ejecuta aquí lo que quieras que pase cuando hay muchas fallas
-		apagarPlanta() // se debe dejar de enviar la señal de encendido hasta que se resetee
 	} else {
 		// Revisamos en que modo está el transfer y tomamos decisiones en base a eso.
 		if (modoAuto == 1) {
@@ -58,5 +57,7 @@ int red = digitalread(B) // B representa el puerto en el que esta la señal de l
 			intentosFallidos += 1 // Aumento el contador de intentos fallidos
 			apagarPlanta() // Dejo de enviar la señal de encendido de la planta 
 			delay(700)	// Esperamos a que se ejecute el codigo de la planta	
-		}  
+		}  else {
+			intentosFallidos = 0 // Si encendió correctamente, se resetea el contador de intentos fallidos
+		}
 	}
